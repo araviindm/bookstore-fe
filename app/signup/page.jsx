@@ -1,7 +1,12 @@
-import React from "react";
+import NavBar from "@/components/NavBar";
 
 const SignUp = () => {
-  return <div>SignUp</div>;
+  return (
+    <div>
+      <NavBar />
+      <div>Sign up</div>
+    </div>
+  );
 };
 
 export default SignUp;

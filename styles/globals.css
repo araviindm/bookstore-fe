@@ -1,9 +1,9 @@
-@import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Geologica&display=swap");
 
 @import "tailwindcss/base";
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
 
 body {
-  @apply font-roboto dark:bg-gray-900;
+  @apply mx-6 font-geologica dark:bg-gray-900 dark:text-slate-200;
 }
