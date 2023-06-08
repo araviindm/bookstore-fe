@@ -51,7 +51,11 @@ const Signup = () => {
     <>
       <NavBar />
       <div className="flex items-center justify-center h-4/5">
-        <div className="absolute flex-shrink-0 p-8 transform -translate-x-1/2 -translate-y-1/2 bg-white rounded-lg shadow w-80 top-1/2 left-1/2 dark:bg-gray-800">
+        <div
+          className={`absolute flex-shrink-0 px-8 transform -translate-x-1/2 bg-white rounded-lg shadow -translate-y-[43%] w-80 top-1/2 left-1/2 dark:bg-gray-800 ${
+            !nameError && !emailError && !passwordError ? "py-8" : "py-4"
+          }`}
+        >
           <h2 className="mb-4 text-2xl font-bold text-center ">Signup</h2>
           <form onSubmit={handleSubmit}>
             <div className="mb-4">
