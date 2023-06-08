@@ -28,7 +28,7 @@ class CustmomerStore {
     let customerOrders = [];
     this.orders.forEach((order) => {
       const date = new Date(order.created);
-      const created = format(date, "d/M/yy, h:mm a");
+      const created = format(date, "dd/MM/yy, h:mm a");
       let result = books.find((book) => book._id === order.order_id);
       let customerOrder = {
         _id: order.order_id,

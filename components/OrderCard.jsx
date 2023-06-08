@@ -12,7 +12,7 @@ const OrderCard = ({ order }) => {
       <div className="mx-4">
         <p className="mb-0.5 text-xl font-bold">{order.title}</p>
         <p className="mb-6 text-sm font-bold capitalize">{order.author}</p>
-        <p className="text-xs">{order.created}</p>
+        <p className="text-xs">Ordered : {order.created}</p>
       </div>
     </div>
   );
