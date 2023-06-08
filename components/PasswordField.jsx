@@ -16,7 +16,7 @@ const PasswordField = ({
           value={password}
           onChange={handleChangePassword}
           className={`w-full px-3 py-2 border border-gray-300 rounded dark:border-gray-400 dark:bg-gray-800 focus:outline-none ${
-            passwordError ? "border-red-400" : ""
+            passwordError ? "border-red-400 dark:border-red-400" : ""
           } `}
           placeholder="Enter your password"
         />
