@@ -27,11 +27,13 @@ const DarkModeToggle = () => {
         className="flex h-[25px] w-[25px] items-center justify-center rounded-full bg-black/80"
         onClick={toggleSwitch}
       >
-        {isOn ? (
-          <RiSunFill className="w-3 h-3 text-yellow-300 " />
-        ) : (
-          <RiMoonClearFill className="w-3 h-3 text-white" />
-        )}
+        <button>
+          {isOn ? (
+            <RiSunFill className="w-3 h-3 text-yellow-300 " />
+          ) : (
+            <RiMoonClearFill className="w-3 h-3 text-white" />
+          )}
+        </button>
       </div>
     </div>
   );
