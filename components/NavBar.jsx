@@ -1,10 +1,10 @@
 "use client";
 import Link from "next/link";
 import DarkModeToggle from "@/components/DarkModeToggle";
-import rootStore from "@/stores/index";
+import rootStore from "@/stores";
 
 const NavBar = () => {
-  let firstLetterOfName = rootStore.custmomerStore.name[0];
+  let firstLetterOfName = rootStore.userStore.name[0];
   return (
     <div className="w-full border-b h-1/5 border-slate-500">
       <nav>

@@ -2,10 +2,14 @@
 import EmailField from "@/components/EmailField";
 import NavBar from "@/components/NavBar";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { validateEmail, validatePassword } from "@/hooks/useValidate";
 import PasswordField from "@/components/PasswordField";
+
+import rootStore from "@/stores";
 const Login = () => {
+  const router = useRouter();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPasword] = useState(false);
@@ -25,13 +29,29 @@ const Login = () => {
   const handleTogglePassword = () => {
     setShowPasword(!showPassword);
   };
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    setEmailError(validateEmail(e.target.value));
-    setPasswordError(validatePassword(e.target.value));
+    setEmailError(validateEmail(email));
+    setPasswordError(validatePassword(password));
     if (!emailError && !passwordError) {
       // Perform login or submit form
-      console.log("Login successful");
+      let resp = await rootStore.userStore.login({
+        email: email,
+        password: password,
+      });
+      if (resp.status === 200) {
+        let data = resp.data;
+        rootStore.userStore._id = data._id;
+        rootStore.userStore.name = data.name;
+        rootStore.userStore.email = data.email;
+        rootStore.userStore.cart = data.cart;
+        rootStore.userStore.orders = data.orders;
+        rootStore.userStore.jwtToken = data.access_token;
+        rootStore.userStore.isLoggedIn = true;
+        router.push("/");
+      } else {
+        console.log("Error logging in", resp);
+      }
     }
   };
   return (

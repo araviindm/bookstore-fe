@@ -2,13 +2,13 @@
 import NavBar from "@/components/NavBar";
 import OrderCard from "@/components/OrderCard";
 import { useState } from "react";
-import rootStore from "@/stores/index";
+import rootStore from "@/stores";
 import { FaGreaterThan, FaLessThan } from "react-icons/fa";
 
 const Profile = () => {
-  const orders = rootStore.custmomerStore.prepareOrders(
-    rootStore.bookStore.books
-  );
+  // const orders = rootStore.custmomerStore.prepareOrders(
+  //   rootStore.bookStore.books
+  // );
   const itemsPerPage = 2; // Number of items to display per page
   const [currentPage, setCurrentPage] = useState(1);
   const totalBooks = orders.length;
@@ -25,8 +25,8 @@ const Profile = () => {
     <>
       <NavBar />
       <div className="container py-4 mx-auto">
-        <h1 className="mb-4 text-2xl font-bold text-right">
-          {rootStore.custmomerStore.name}
+        <h1 className="mb-4 text-2xl font-bold text-right capitalize">
+          {rootStore.userStore.name}
         </h1>
         <h2 className="mb-2 text-xl font-bold ">Purchased Items</h2>
         {currentBooks.map((order) => (
