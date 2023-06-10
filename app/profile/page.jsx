@@ -32,8 +32,6 @@ const Profile = () => {
         setOrders(data);
       } else {
         setCurrentPage(0);
-        console.log(resp);
-        console.log("No orders found");
       }
     };
     fetchOrders();
