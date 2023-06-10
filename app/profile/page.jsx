@@ -1,14 +1,15 @@
 "use client";
+import { useState } from "react";
+
 import NavBar from "@/components/NavBar";
 import OrderCard from "@/components/OrderCard";
-import { useState } from "react";
-import rootStore from "@/stores";
+
 import { FaGreaterThan, FaLessThan } from "react-icons/fa";
 
+import rootStore from "@/stores";
+
 const Profile = () => {
-  // const orders = rootStore.custmomerStore.prepareOrders(
-  //   rootStore.bookStore.books
-  // );
+  const orders = rootStore.orderStore.orders;
   const itemsPerPage = 2; // Number of items to display per page
   const [currentPage, setCurrentPage] = useState(1);
   const totalBooks = orders.length;
