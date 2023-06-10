@@ -1,4 +1,4 @@
-import rootStore from "@/stores";
+import store from "@/stores";
 import axios from "axios";
 export default async function handler(request) {
   const { method, url, body } = request;
@@ -10,7 +10,7 @@ export default async function handler(request) {
       data: body,
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer ${rootStore.userStore.jwtToken}`,
+        Authorization: `Bearer ${store.jwtToken}`,
       },
     });
     return {
@@ -18,10 +18,10 @@ export default async function handler(request) {
       data: resp.data,
     };
   } catch (error) {
+    console.log(error.response.status);
     return {
-      status: 404,
       code: error.code,
-      message: error.message,
+      message: error.response.data.detail,
     };
   }
 }

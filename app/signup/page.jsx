@@ -17,7 +17,7 @@ import {
   validatePassword,
 } from "@/hooks/useValidate";
 
-import rootStore from "@/stores";
+import store from "@/stores";
 
 const Signup = () => {
   const router = useRouter();
@@ -60,7 +60,7 @@ const Signup = () => {
     setPasswordError(validatePassword(password));
     if (!nameError && !emailError && !passwordError) {
       setLoading(true);
-      let resp = await rootStore.userStore.signup({
+      let resp = await store.signup({
         name: name,
         email: email,
         password: password,

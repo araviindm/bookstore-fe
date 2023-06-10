@@ -12,7 +12,7 @@ import Loader from "@/components/Loader";
 
 import { validateEmail, validatePassword } from "@/hooks/useValidate";
 
-import rootStore from "@/stores";
+import store from "@/stores";
 
 const Login = () => {
   const router = useRouter();
@@ -42,19 +42,19 @@ const Login = () => {
     setShowPasword(!showPassword);
   };
   const handleSubmit = async (e) => {
+    setLoginError("");
     e.preventDefault();
     setEmailError(validateEmail(email));
     setPasswordError(validatePassword(password));
     if (!emailError && !passwordError) {
       setLoading(true);
-      let resp = await rootStore.userStore.login({
+      let resp = await store.login({
         email: email,
         password: password,
       });
 
       if (resp === true) {
         router.push("/");
-        rootStore.orderStore.getOrders(rootStore.userStore._id);
         setLoading(false);
       } else {
         console.log("Error logging in", resp);

@@ -1,10 +1,10 @@
 "use client";
 import Link from "next/link";
 import DarkModeToggle from "@/components/DarkModeToggle";
-import rootStore from "@/stores";
+import store from "@/stores";
 
 const NavBar = () => {
-  let firstLetterOfName = rootStore.userStore.name[0];
+  let firstLetterOfName = store.name ? store.name[0] : "U";
   return (
     <div className="w-full border-b h-1/5 border-slate-500">
       <nav>
@@ -13,7 +13,7 @@ const NavBar = () => {
             <li className="py-2 pb-6 mt-2.5 text-slate-200">
               <DarkModeToggle />
             </li>
-            {rootStore.userStore.isLoggedIn ? (
+            {store.isLoggedIn ? (
               <li className="py-2 pb-6 pl-2 text-center md:pl-6">
                 <Link href="/profile">
                   <div className="w-10 h-10 pt-[8px] pr-[2px] uppercase text-white rounded-full bg-sky-500 hover:bg-sky-600">
