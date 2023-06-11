@@ -1,9 +1,13 @@
 "use client";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import DarkModeToggle from "@/components/DarkModeToggle";
+
+import { AiOutlineShoppingCart } from "react-icons/ai";
 import store from "@/stores";
 
 const NavBar = () => {
+  const router = useRouter();
   let firstLetterOfName = store.name ? store.name[0] : "U";
   return (
     <div className="w-full border-b h-1/5 border-slate-500">
@@ -37,6 +41,16 @@ const NavBar = () => {
                 </li>
               </>
             )}
+            <li>
+              <button className="py-2 pb-6 text-center md:pl-2">
+                <AiOutlineShoppingCart
+                  className="w-10 h-10"
+                  onClick={() => {
+                    router.push("/cart");
+                  }}
+                />
+              </button>
+            </li>
           </ul>
         </div>
       </nav>

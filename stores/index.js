@@ -90,6 +90,38 @@ class Store {
     }
   }
 
+  @action async postCart(book_id) {
+    let apiCall = {
+      method: "POST",
+      url: `${store.apiUrl}/api/cart`,
+      body: {
+        cust_id: this._id,
+        book_id: book_id,
+      },
+    };
+    let resp = await handler(apiCall);
+
+    if (resp.status === 200) {
+      return true;
+    } else {
+      return resp;
+    }
+  }
+
+  @action async deleteCart(body) {
+    let apiCall = {
+      method: "DELETE",
+      url: `${store.apiUrl}/api/cart`,
+      body: body,
+    };
+    let resp = await handler(apiCall);
+    if (resp.status === 200) {
+      return true;
+    } else {
+      return resp;
+    }
+  }
+
   constructor() {
     makeAutoObservable(this);
 

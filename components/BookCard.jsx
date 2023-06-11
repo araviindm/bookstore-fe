@@ -6,10 +6,11 @@ import store from "@/stores";
 
 const BookCard = ({ book }) => {
   const [showDialog, setShowDialog] = useState(false);
-  const [dialogText, setDialogText] = useState("Order placed!!");
+  const [dialogText, setDialogText] = useState("");
   const handleBuyClick = async () => {
     const resp = await store.postOrder(book._id);
     if (resp === true) {
+      setDialogText("Order placed!!");
       setShowDialog(true);
       setTimeout(() => {
         setShowDialog(false);
@@ -17,6 +18,21 @@ const BookCard = ({ book }) => {
     } else {
       console.log("Error logging in", resp);
       setDialogText(resp.message);
+      setShowDialog(true);
+    }
+  };
+  const handleCartClick = async () => {
+    const resp = await store.postCart(book._id);
+    if (resp === true) {
+      setDialogText("Added to cart");
+      setShowDialog(true);
+      setTimeout(() => {
+        setShowDialog(false);
+      }, 600);
+    } else {
+      console.log("Error logging in", resp);
+      setDialogText(resp.message);
+      setShowDialog(true);
     }
   };
   return (
@@ -36,7 +52,10 @@ const BookCard = ({ book }) => {
         <p className="capitalize">₹ {book.price}</p>
       </div>
       <div className="flex items-center justify-around">
-        <button className="p-2 border rounded w-28 border-sky-500 hover:bg-sky-200 dark:hover:text-black">
+        <button
+          className="p-2 border rounded w-28 border-sky-500 hover:bg-sky-200 dark:hover:text-black"
+          onClick={handleCartClick}
+        >
           Add to cart
         </button>
         <button

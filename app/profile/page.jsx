@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 
 import NavBar from "@/components/NavBar";
-import OrderCard from "@/components/OrderCard";
+import DataCard from "@/components/DataCard";
 
 import store from "@/stores";
 import handler from "@/utils/apiHandler";
@@ -42,7 +42,7 @@ const Profile = () => {
         {orders.length > 0 ? (
           <>
             {orders.map((order) => (
-              <OrderCard key={uuidv4()} order={order} />
+              <DataCard key={uuidv4()} data={order} isOrder={true} />
             ))}
             <BackToTopButton />
           </>
