@@ -18,7 +18,6 @@ export default async function handler(request) {
       data: resp.data,
     };
   } catch (error) {
-    console.log(error);
     if (error.response.status === 403) {
       localStorage.clear();
       location.href = `${window.location.origin}/login`;

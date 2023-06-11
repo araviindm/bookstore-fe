@@ -1,5 +1,5 @@
 import { observable, action, makeAutoObservable } from "mobx";
-import { makePersistable } from "mobx-persist-store";
+import { makePersistable, stopPersisting } from "mobx-persist-store";
 import handler from "@/utils/apiHandler";
 
 const apiUrl = process.env.NEXT_PUBLIC_BASE_URL;
@@ -10,8 +10,6 @@ class Store {
   @observable _id = "";
   @observable name = "";
   @observable email = "";
-  @observable cart = [];
-  @observable books = [];
 
   @action async signup(body) {
     let apiCall = {
@@ -26,8 +24,6 @@ class Store {
       this._id = data._id;
       this.name = data.name;
       this.email = data.email;
-      this.cart = data.cart;
-      this.orders = data.orders;
       this.jwtToken = data.access_token;
       this.isLoggedIn = true;
 
@@ -59,6 +55,23 @@ class Store {
     }
   }
 
+  @action async search({ search }) {
+    let url = new URL(`${apiUrl}/api/search`);
+    if (search) {
+      url.searchParams.append("search_query", search);
+    }
+    let apiCall = {
+      method: "GET",
+      url: url,
+    };
+    let resp = await handler(apiCall);
+    if (resp.status === 200) {
+      return resp;
+    } else {
+      return resp;
+    }
+  }
+
   constructor() {
     makeAutoObservable(this);
 
@@ -69,6 +82,5 @@ class Store {
     });
   }
 }
-
 const store = new Store();
 export default store;

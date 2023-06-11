@@ -12,11 +12,13 @@ const OrderCard = ({ order }) => {
         }
         width={70}
         height={40}
-        alt="Cover Image"
+        alt={order.title}
       />
       <div className="mx-4">
         <p className="mb-0.5 text-xl font-bold">{order.title}</p>
-        <p className="mb-6 text-sm font-bold capitalize">{order.author}</p>
+        <p className="mb-6 text-sm font-bold capitalize">
+          Author: {order.author}
+        </p>
         <p className="text-xs">Ordered : {format(order.created, "dd-MM-yy")}</p>
       </div>
     </div>
