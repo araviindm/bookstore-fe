@@ -11,14 +11,13 @@ import handler from "@/utils/apiHandler";
 import BackToTopButton from "@/components/BackToTopButton";
 
 const Profile = () => {
-  const apiUrl = process.env.NEXT_PUBLIC_BASE_URL;
   const [orders, setOrders] = useState([]);
 
   useEffect(() => {
     const fetchOrders = async () => {
       let apiCall = {
         method: "GET",
-        url: `${apiUrl}/api/order/${store._id}`,
+        url: `${store.apiUrl}/api/order/${store._id}`,
       };
       let resp = await handler(apiCall);
       if (resp.status === 200) {
@@ -30,7 +29,7 @@ const Profile = () => {
     };
     fetchOrders();
     return () => {};
-  }, [apiUrl]);
+  }, []);
 
   return (
     <>

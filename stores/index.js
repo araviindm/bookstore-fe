@@ -2,19 +2,18 @@ import { observable, action, makeAutoObservable } from "mobx";
 import { makePersistable, stopPersisting } from "mobx-persist-store";
 import handler from "@/utils/apiHandler";
 
-const apiUrl = process.env.NEXT_PUBLIC_BASE_URL;
-
 class Store {
   @observable jwtToken = "";
   @observable isLoggedIn = false;
   @observable _id = "";
   @observable name = "";
   @observable email = "";
+  @observable apiUrl = process.env.NEXT_PUBLIC_BASE_URL;
 
   @action async signup(body) {
     let apiCall = {
       method: "POST",
-      url: `${apiUrl}/api/register`,
+      url: `${this.apiUrl}/api/register`,
       body: body,
     };
     let resp = await handler(apiCall);
@@ -36,7 +35,7 @@ class Store {
   @action async login(body) {
     let apiCall = {
       method: "POST",
-      url: `${apiUrl}/api/login`,
+      url: `${this.apiUrl}/api/login`,
       body: body,
     };
     let resp = await handler(apiCall);
@@ -56,7 +55,7 @@ class Store {
   }
 
   @action async search({ search }) {
-    let url = new URL(`${apiUrl}/api/search`);
+    let url = new URL(`${this.apiUrl}/api/search`);
     if (search) {
       url.searchParams.append("search_query", search);
     }
@@ -67,6 +66,25 @@ class Store {
     let resp = await handler(apiCall);
     if (resp.status === 200) {
       return resp;
+    } else {
+      return resp;
+    }
+  }
+
+  @action async postOrder(book_id) {
+    let apiCall = {
+      method: "POST",
+      url: `${store.apiUrl}/api/order`,
+      body: {
+        cust_id: this._id,
+        order_date: Date.now(),
+        book_id: book_id,
+      },
+    };
+    let resp = await handler(apiCall);
+
+    if (resp.status === 200) {
+      return true;
     } else {
       return resp;
     }
