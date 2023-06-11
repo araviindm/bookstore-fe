@@ -8,6 +8,7 @@ import OrderCard from "@/components/OrderCard";
 
 import store from "@/stores";
 import handler from "@/utils/apiHandler";
+import BackToTopButton from "@/components/BackToTopButton";
 
 const Profile = () => {
   const apiUrl = process.env.NEXT_PUBLIC_BASE_URL;
@@ -44,6 +45,7 @@ const Profile = () => {
             {orders.map((order) => (
               <OrderCard key={uuidv4()} order={order} />
             ))}
+            <BackToTopButton />
           </>
         ) : (
           <div>No Orders found</div>

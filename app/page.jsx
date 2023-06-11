@@ -3,13 +3,13 @@ import { useEffect, useState, useCallback } from "react";
 
 import NavBar from "@/components/NavBar";
 import BookCard from "@/components/BookCard";
-
-import ErrorPopup from "@/components/ErrorPopup";
 import Loader from "@/components/Loader";
+import BackToTopButton from "@/components/BackToTopButton";
 
 import { BsSearch } from "react-icons/bs";
 
 import store from "@/stores";
+
 const Home = () => {
   const [loading, setLoading] = useState(false);
   const [books, setBooks] = useState([]);
@@ -32,7 +32,9 @@ const Home = () => {
 
   const handleSearchChange = (e) => {
     setSearch(e.target.value);
-    // getBooks();
+  };
+  const handleSubmit = (e) => {
+    e.preventDefault();
   };
   useEffect(() => {
     setLoading(false);
@@ -46,13 +48,16 @@ const Home = () => {
         <Loader />
       ) : (
         <>
-          <form className="flex items-center justify-center m-2 sm:flex-row">
+          <form
+            className="flex items-center justify-center m-2 sm:flex-row"
+            onSubmit={handleSubmit}
+          >
             <div className="relative">
               <input
                 type="text"
                 onChange={handleSearchChange}
                 placeholder="Search..."
-                className="py-2 pl-10 pr-4 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-sky-500"
+                className="py-2 pl-10 pr-4 border border-gray-300 rounded-md dark:border-gray-700 focus:outline-none focus:ring-2 focus:ring-sky-500 dark:bg-gray-800"
               />
               <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
                 <BsSearch className="w-5 h-5 text-gray-400" />
@@ -65,6 +70,7 @@ const Home = () => {
             ))}
           </div>
           {books.length < 1 && <div>No results found</div>}
+          <BackToTopButton />
         </>
       )}
     </>
